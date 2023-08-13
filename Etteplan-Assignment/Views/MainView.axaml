@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Etteplan_Assignment.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
              x:Class="Etteplan_Assignment.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
@@ -12,5 +12,12 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+		<DockPanel DockPanel.Dock="Top">
+			<Label VerticalAlignment="Center">ID: </Label>
+			<TextBox Text="{Binding Id}" MinWidth="100" TextAlignment="Center"/>
+			<Button Command="{Binding SaveFileCommand}" Margin="10,0,0,0">Save</Button>
+		</DockPanel >
+		<ListBox DockPanel.Dock="Top" ItemsSource="{Binding ErrorMessages}"/>
+	</DockPanel>
 </UserControl>
