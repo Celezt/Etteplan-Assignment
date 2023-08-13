@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Etteplan-Assignment", "Etteplan-Assignment.csproj", "{44683937-C058-4B63-B68A-5BF8AE0F7365}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Etteplan-Assignment.Desktop", "..\Etteplan-Assignment.Desktop\Etteplan-Assignment.Desktop.csproj", "{D8827ACC-15ED-47DF-A474-057B85C4DE19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44683937-C058-4B63-B68A-5BF8AE0F7365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44683937-C058-4B63-B68A-5BF8AE0F7365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44683937-C058-4B63-B68A-5BF8AE0F7365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44683937-C058-4B63-B68A-5BF8AE0F7365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8827ACC-15ED-47DF-A474-057B85C4DE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8827ACC-15ED-47DF-A474-057B85C4DE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8827ACC-15ED-47DF-A474-057B85C4DE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8827ACC-15ED-47DF-A474-057B85C4DE19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2CA6C96-77A7-4D50-890A-ACA9A958BFA6}
+	EndGlobalSection
+EndGlobal
