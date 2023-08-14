@@ -33,7 +33,7 @@ public static class XMLUtility
                     break;
 
                 if (!char.IsLetter(text[leftIndex]) && text[leftIndex] is not '-')    // Invalid: name must be a letter. <tag-name> ! <%3+>
-                    throw new XMLException($"Character: '{text[leftIndex]}' is not a letter");
+                    throw new XMLException($"Name cannot contain any numbers or symbols: '{text[leftIndex]}'");
             }
 
             return text.AsMemory(startIndex, leftIndex - startIndex);
@@ -43,8 +43,8 @@ public static class XMLUtility
         {
             attribute = default;
 
-            for (; leftIndex <= rightIndex; leftIndex++)
-                if (!char.IsWhiteSpace(text[leftIndex]))
+            for (; leftIndex <= rightIndex; leftIndex++)     // Skip whitespace between attributes.
+                if (text[leftIndex] is not ' ')
                     break;
 
             if (leftIndex == endIndex)
@@ -65,7 +65,7 @@ public static class XMLUtility
                 if (text[leftIndex] is ' ')
                     throw new XMLException("Attribute names are not allowed to end with whitespace.");
 
-                if (!char.IsLetter(text[leftIndex]) && text[leftIndex] != '-')    // Invalid: name must be a letter. <tag> ! <%3->
+                if (!char.IsLetter(text[leftIndex]) && text[leftIndex] is not '-')    // Invalid: name must be a letter. <tag-name> ! <%3+>
                     throw new XMLException($"Name cannot contain any numbers or symbols: '{text[leftIndex]}'");
             }
 
