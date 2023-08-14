@@ -140,7 +140,7 @@ public static class XMLUtility
                 }
                 else
                 {
-                    var arguments = new List<(ReadOnlyMemory<char>, ReadOnlyMemory<char>)>();
+                    var attributes = new List<(ReadOnlyMemory<char>, ReadOnlyMemory<char>)>();
 
                     if (text[leftIndex] is '/' or '?')  // After / or ?.
                         leftIndex++;
@@ -152,10 +152,10 @@ public static class XMLUtility
                         if (!TryGetAttribute(out var attribute))
                             break;
 
-                        arguments.Add(attribute);
+                        attributes.Add(attribute);
                     }
 
-                    var xmlObject = new XMLObject(tagName, arguments);
+                    var xmlObject = new XMLObject(tagName, attributes);
 
                     if (_tags.TryPeek(out var parent))
                         parent.Children.Add(xmlObject); // Add itself to parent.
