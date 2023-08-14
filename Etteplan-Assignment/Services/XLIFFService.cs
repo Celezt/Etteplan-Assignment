@@ -6,16 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Etteplan_Assignment.Services;
 
-public class XLIFFService
+public class XLIFFService : IXLIFFService
 {
-    public string Text => _text;
-    
     private string _text;
     private XMLTree _tree;
 
@@ -28,7 +23,7 @@ public class XLIFFService
     }
 
     /// <summary>
-    /// Get all translation <see cref="XMLObject"/> found.
+    /// Get all translation <see cref="XMLObject"/>s found.
     /// </summary>
     /// <returns>Translation <see cref="XMLObject"/>s.</returns>
     /// <exception cref="XMLException"></exception>

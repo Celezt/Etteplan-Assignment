@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace Etteplan_Assignment.Data;
 
+/// <summary>
+/// Container for an XML tag.
+/// </summary>
 public class XMLObject
 {
-    public bool IsClosed => _isClosed;
     public ReadOnlyMemory<char> Name => _name;
     public ReadOnlyMemory<char> Content => _content;
     public IReadOnlyList<(ReadOnlyMemory<char> Name, ReadOnlyMemory<char> Value)> Attributes => _attributes;
@@ -15,7 +17,6 @@ public class XMLObject
     private ReadOnlyMemory<char> _content;
     private List<(ReadOnlyMemory<char>, ReadOnlyMemory<char>)> _attributes;
     private List<XMLObject> _children;
-    private bool _isClosed;
 
     public XMLObject(ReadOnlyMemory<char> name, List<(ReadOnlyMemory<char>, ReadOnlyMemory<char>)>? attributes = null)
     {
@@ -27,6 +28,5 @@ public class XMLObject
     {
         _content = content ?? ReadOnlyMemory<char>.Empty;
         _children = children ?? new();
-        _isClosed = true;
     }
 }

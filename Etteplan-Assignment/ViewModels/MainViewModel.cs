@@ -41,10 +41,10 @@ public partial class MainViewModel : ViewModelBase
             if (file is null)
                 return;
 
-            var xliffService = App.Current?.Services?.GetService<XLIFFService>();
+            var xliffService = App.Current?.Services?.GetService<IXLIFFService>();
 
             if (xliffService is null)
-                throw new NullReferenceException($"Missing {nameof(XLIFFService)} instance.");
+                throw new NullReferenceException($"Missing {nameof(IXLIFFService)} instance.");
 
             var transObject = xliffService.GetTranslationObject(Id);
 

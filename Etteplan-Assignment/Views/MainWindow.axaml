@@ -7,6 +7,6 @@
 		Width="400" Height="400"
         x:Class="Etteplan_Assignment.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Translation Manager">
+        Title="Save Translation!">
         <views:MainView />
 </Window>

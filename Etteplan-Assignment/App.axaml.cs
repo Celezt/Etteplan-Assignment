@@ -39,7 +39,7 @@ public partial class App : Application
 
             var services = new ServiceCollection();
             services.AddSingleton<IFilesService>(x => new FilesService(desktop.MainWindow));
-            services.AddSingleton<XLIFFService>(x => new XLIFFService(new Uri(@"avares://Etteplan-Assignment/Assets/sma_gentext.xml")));
+            services.AddSingleton<IXLIFFService>(x => new XLIFFService(new Uri(@"avares://Etteplan-Assignment/Assets/sma_gentext.xml")));
             Services = services.BuildServiceProvider();
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)

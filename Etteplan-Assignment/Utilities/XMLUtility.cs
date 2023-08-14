@@ -1,13 +1,6 @@
-﻿using Avalonia.Media;
-using Etteplan_Assignment.Data;
+﻿using Etteplan_Assignment.Data;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Etteplan_Assignment.Utilities;
 
@@ -16,13 +9,13 @@ public static class XMLUtility
     private static Stack<(XMLObject XmlObject, List<XMLObject> Children, int Index)> _tags = new();
 
     /// <summary>
-    /// Converts text to a <see cref="XMLTree"/> tree.
+    /// Converts text to a <see cref="XMLTree"/>.
     /// </summary>
     /// <param name="text">To convert.</param>
     /// <exception cref="XMLException"></exception>
     public static XMLTree ReadAsXML(string text)
     {
-        var rootXMLObjects = new List<XMLObject>();
+        var roots = new List<XMLObject>();
         int beginIndex = 0;
         int endIndex = 0;
         int leftIndex = 0;
@@ -32,9 +25,6 @@ public static class XMLUtility
 
         ReadOnlyMemory<char> GetTagName()
         {
-            if (text[leftIndex] is '/' or '?')
-                leftIndex++;
-
             int startIndex = leftIndex;
 
             for (; leftIndex < endIndex; leftIndex++) // <?=
@@ -152,11 +142,14 @@ public static class XMLUtility
                 {
                     var arguments = new List<(ReadOnlyMemory<char>, ReadOnlyMemory<char>)>();
 
+                    if (text[leftIndex] is '/' or '?')  // After / or ?.
+                        leftIndex++;
+
                     var tagName = GetTagName();
 
                     while (leftIndex <= rightIndex)
                     {
-                        if (!TryGetAttribute(out var attribute))   // If there is no arguments left.
+                        if (!TryGetAttribute(out var attribute))
                             break;
 
                         arguments.Add(attribute);
@@ -165,11 +158,11 @@ public static class XMLUtility
                     var xmlObject = new XMLObject(tagName, arguments);
 
                     if (_tags.TryPeek(out var parent))
-                        parent.Children.Add(xmlObject);
+                        parent.Children.Add(xmlObject); // Add itself to parent.
                     else
-                        rootXMLObjects.Add(xmlObject);  // Is root XMLObject if no parent exist.
+                        roots.Add(xmlObject);  // Is root XMLObject if no parent exist.
 
-                    if (text[rightIndex] is '/' or '?') // Tag is a independent tag. <tag/>
+                    if (text[rightIndex] is '/' or '?') // Tag is an independent tag. <tag/> || <?tag?>
                         xmlObject.Close();
                     else                        // Tag is an open tag. <tag>
                         _tags.Push((xmlObject, new List<XMLObject>(), endIndex + 1));
@@ -179,17 +172,17 @@ public static class XMLUtility
             }
         }
 
-        return new XMLTree(rootXMLObjects);
+        return new XMLTree(roots);
     }
 
     /// <summary>
-    /// Finds existing tag in the tree. 
+    /// Finds existing tag in the tree by name. 
     /// </summary>
     /// <param name="toFindName">Tag name to find.</param>
     /// <returns>First instance of that tag.</returns>
-    public static XMLObject? Find(this XMLObject xmlObject, string toFindName)
+    public static XMLObject? Find(this XMLObject root, string toFindName)
     {
-        foreach (var child in xmlObject.Children)
+        foreach (var child in root.Children)
         {
             if (child.Name.Span.Equals(toFindName, StringComparison.Ordinal))
                 return child;
